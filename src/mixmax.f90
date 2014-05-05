@@ -96,7 +96,7 @@ CONTAINS
     If (Present(nin)) Then
        nmat = nin
     Else
-       nmat = 3150
+       nmat = 256
     End If
     
     Allocate(rnd%V(nmat))
@@ -130,7 +130,7 @@ CONTAINS
        SPECIAL = -1_8
     Case Default
        CALL mxmx_error('mxmx_init', 'Possible values for N are: '//&
-            &'3150 (default) 1260 1000 720 508 256 88 64 44 40 30 16 10')
+            &'3150 1260 1000 720 508 256 (default) 88 64 44 40 30 16 10')
     End Select
 
     Select Case (SPECIAL)

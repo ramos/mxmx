@@ -27,10 +27,9 @@ Use with caution.
 1) To initialize MIXMAX one needs to call 
    mxmx_init(int32) with the matrix size as input parameters.
    Valid matrix sizes are: 
-   3150 (default) 1260 1000 720 508 256 88 64 44 40 30 16 10
+   3150 1260 1000 720 508 256 (default) 88 64 44 40 30 16 10
    88 or anything bigger should do any job (they all passed the
    BigCrush). The speed is independent of this number.
-LL mxmx_init(Nmx)             
 
 2) Seed the RNG. There are four available methods:
    o mxmx_seed_skip(ids_int32(4)): Seed with an array of up 
