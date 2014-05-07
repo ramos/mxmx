@@ -159,6 +159,11 @@ CONTAINS
     rnd%cnt=1
     is_init = .True.
 
+    If (nmat < 88) Then
+       Write(error_unit,'(1A,1I4)')'**WARNING** MIXMAX Working with a matrix size that is known not to pass all statistical tests '
+       Write(error_unit,'(1A,1I6)')'MIXMAX Matrix size: ', rnd%N
+    End If
+
     Return
   End Subroutine mxmx_init
 
