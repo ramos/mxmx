@@ -36,6 +36,11 @@ MODULE MixMax
 ! *
 ! ***************************************************
 
+  ! For openMP. If this gives any problem/error (i.e. your compiler
+  ! does not support openMP), simply comment this line. Non
+  ! openMP and mpi programs should work.
+  USE omp_lib
+
   USE ISO_FORTRAN_ENV, Only : error_unit, output_unit
   IMPLICIT NONE
 
@@ -62,7 +67,8 @@ MODULE MixMax
           & mxmx_int_v
   End Interface mxmx
 
-  Type (State), Private        :: rnd
+  Type (State), private, save :: rnd
+
   Procedure (Mulspec), Pointer, Private :: Mod_Mulspec => null()!noinit
 
   Integer (kind=8), Parameter, Private :: &
@@ -70,7 +76,7 @@ MODULE MixMax
   Integer (kind=8), Private :: SPECIAL
   
   Integer (kind=8), Allocatable, Private :: skip(:,:)
-  Real (kind=8) :: DINV_MERSBASE=0.433680868994201773791060216479542685926876E-18_8
+  Real (kind=8), Parameter :: DINV_MERSBASE=0.433680868994201773791060216479542685926876E-18_8
 
   Logical, Private :: is_skip_loaded = .False., is_init = .False.
 
@@ -81,6 +87,9 @@ MODULE MixMax
        & Mod_Mulspec_direct, Mod_Mulspec_default, Mod_Mulspec_zero, &
        & Mod_Mulspec_one, mxmx_error, mxmx_f64_v, mxmx_f32, mxmx_int_v, &
        & mxmx_f32_v, mxmx_z64, mxmx_z32, mxmx_z64_v, mxmx_z32_v
+
+
+  !$OMP THREADPRIVATE(rnd,is_init)
 
 CONTAINS
 
